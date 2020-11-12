@@ -6,7 +6,7 @@ from typing import List, Sequence, ForwardRef, Union
 
 "# Bootstrap Columns"
 
-with st.beta_expander('Beta_expander source code'):
+with st.beta_expander('bootstrap_columns source code'):
     with st.echo():
         IntOrIntSequence = Union[int, Sequence[int]] 
         def bootstrap_columns(spec: IntOrIntSequence) -> List[ForwardRef('DeltaGenerator')]:
