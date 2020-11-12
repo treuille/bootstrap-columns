@@ -6,23 +6,25 @@ from typing import List, Sequence, ForwardRef, Union
 
 "# Bootstrap Columns"
 
-IntOrIntSequence = Union[int, Sequence[int]] 
-def bootstrap_columns(spec: IntOrIntSequence) -> List[ForwardRef('DeltaGenerator')]:
-    """Like beta_columns(...), but you have to specify widths in integer
-    increments of 1/12th of the full column."""
-    # Special case for fixed width columns
-    if type(spec) == int:
-        return st.beta_columns(spec)
+with st.beta_expander('Beta_expander source code'):
+    with st.echo():
+        IntOrIntSequence = Union[int, Sequence[int]] 
+        def bootstrap_columns(spec: IntOrIntSequence) -> List[ForwardRef('DeltaGenerator')]:
+            """Like beta_columns(...), but you have to specify widths in integer
+            increments of 1/12th of the full column."""
+            # Special case for fixed width columns
+            if type(spec) == int:
+                return st.beta_columns(spec)
 
-    col_sum = sum(spec)
-    if col_sum > 12:
-        raise RuntimeError('Column widths cannot exceed 12.')
-    elif col_sum == 12:
-        return st.beta_columns(spec)
-    if col_sum < 12:
-        final_col_width = 12 - col_sum
-        extended_columns = tuple(spec) + (final_col_width,)
-        return st.beta_columns(extended_columns)[:-1]
+            col_sum = sum(spec)
+            if col_sum > 12:
+                raise RuntimeError('Column widths cannot exceed 12.')
+            elif col_sum == 12:
+                return st.beta_columns(spec)
+            if col_sum < 12:
+                final_col_width = 12 - col_sum
+                extended_columns = tuple(spec) + (final_col_width,)
+            return st.beta_columns(extended_columns)[:-1]
 
 "## Try It Out"
 
